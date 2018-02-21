@@ -1,3 +1,5 @@
+global maxEdgeSize, minEdgeNeeded
+
 function [G] = simulatedAnnealing(G)
     Gu = G;
     maxIntentos = 100;
@@ -25,7 +27,7 @@ end
 
 function [costo] = funcionEvaluadora(G)
     [costoTotal,conectividad] = costoSteiner(G);
-    costo = costoTotal / conectividad ^ 3;
+    costo = costoTotal / conectividad ^ 10;
 end
 
 
@@ -50,10 +52,24 @@ function [Gu, rateAc, totalAc] = cadenaMarkov(Gu, c, maxIntentos, maxIntentosAc)
     totalAc = intentosAc;
 end
 
-
 function [Gv] = generaVecino(Gu)
+    if rand < 0.5 % Agregar
+        if size(Gu) < minNeededEdges - 1
+            % Agrega edge
+        elseif rand < ((minNeededEdges - 1) / size(Gu)) ^ 1.3
+            % Agrega edge
+        else
+            % Quita edge
+        end
+    else % Quitar edge
+        if size(Gu) > minNeededEdges - 1
+            % Quitar edge
+        elseif rand < ((minNeededEdges - 1) / size(Gu)) ^ 1.3
+            % Quita edge
+        else
+            % Agrega edge
+        end
+    end
 
-
-
-
+    Gv = Gu;
 end
