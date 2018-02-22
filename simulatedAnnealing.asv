@@ -1,4 +1,4 @@
-global maxEdgeSize  minNeededEdges
+global maxEdgeSize  minEdgeNeeded
 
 function [G] = simulatedAnnealing(G)
     Gu = G;
