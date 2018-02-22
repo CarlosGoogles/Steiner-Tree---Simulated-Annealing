@@ -21,28 +21,30 @@ clf
 graficaSteiner('i',xC,yC,P,ind,A,T)
 % Se grafican sólo los nodos originales
 graficaSteiner('ng')
-pause
+%pause
 % Se grafican los nodos originales y los nodos de Steiner
 graficaSteiner('n')
-pause
+%pause
 
 %% Gráfica de todas las aristas posibles
 
 clf
 % Se grafican todas las aristas
 graficaSteiner('a')
-pause
+%pause
 %% Gráfica de un árbol de Steiner
 
 clf
 % Grafo que se desea graficar
 G = [4 8 10 17 20 22 27 37 41 42 43 44 45 47 48 57 58];
+% G = [];
 % Se inicializan datos para calcular el costo
 costoSteiner(A,P,ind)
 % Se calculan los costos del grafo G
-[costoTotal,conectividad] = costoSteiner(G)
+[costoTotal,conectividad] = costoSteiner(G);
 % Se grafica el grafo G
 graficaSteiner('g',G)
+
 title(sprintf('costoTotal=%f conectividad=%f',costoTotal,conectividad))
 
 %% Costos de un árbol de Steiner
@@ -52,3 +54,10 @@ costoSteiner(A,P,ind)
 % Se calculan los costos del grafo G
 [costoTotal,conectividad] = costoSteiner(G)
 
+[G] = simulatedAnnealing(G, size(T, 1))
+[G] = simulatedAnnealing(G, size(T, 1))
+
+clf
+graficaSteiner('g',G)
+[costoTotal,conectividad] = costoSteiner(G)
+title(sprintf('costoTotal=%f conectividad=%f',costoTotal,conectividad))
