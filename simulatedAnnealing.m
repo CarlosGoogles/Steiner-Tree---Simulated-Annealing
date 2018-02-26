@@ -4,10 +4,10 @@ function [G] = simulatedAnnealing(G, maxiEdge)
     maxEdgeSize = maxiEdge;
     minNeededEdges = 1000000;
     Gu = G;
-    maxIntentos = 2500;
-    maxIntentosAc = 500;
+    maxIntentos = 1500;
+    maxIntentosAc = 150;
     c = 5;
-    alpha = 0.99;
+    alpha = 0.95;
     
     funcionEvaluadora(Gu)
     
@@ -21,13 +21,27 @@ function [G] = simulatedAnnealing(G, maxiEdge)
     
     %% Cadena de Markov
     totalAc = 0;
-    while totalAc < 300 && c > 0.1
+    imprimeRate = 0
+    while c > 0.1
         [Gu, ~, totalTemp] = cadenaMarkov(Gu, c, maxIntentos, maxIntentosAc);
         c = alpha * c;
         totalAc = totalAc + totalTemp;
+        
+        if imprimeRate == 40
+            clf
+            graficaSteiner('g',mejorRespuestaGrafo)
+            [costoTotal,conectividad] = costoSteiner(Gu);
+            title(sprintf('costoTotal=%f conectividad=%f',costoTotal,conectividad))
+            imprimeRate = 0;
+            pause(1);
+        end
+        imprimeRate = imprimeRate + 1;
     end
+    %(
+    disp (Gu)
     disp (maxEdgeSize)
     disp (minNeededEdges)
+    %)
     G = mejorRespuestaGrafo;
 end
 
