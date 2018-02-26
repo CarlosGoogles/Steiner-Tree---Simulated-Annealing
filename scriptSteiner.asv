@@ -28,10 +28,10 @@ costoSteiner(A, P, ind);
 
 clf;
 
-params.cadIntAcep = 20;
-params.cadInt = 200;
+params.cadIntAcep = 50;
+params.cadInt = 500;
 params.maxCad = 10;
-params.frecImp = 5000;
+params.frecImp = 500;
 params.x0 = G;
 params.FcnObj = @funcionEvaluadora; % Ver en simulatedAnnealing.m
 params.FcnVec = @generaVecino1;     % Ver en simulatedAnnealing.m
@@ -44,7 +44,7 @@ params.min = 1;
 params.maxSize = size(T, 1);
 
 
-totalCorridas = 10;
+totalCorridas = 2;
 propio = 0;
 
 if propio == 1 % Implementacion de Carlos y Elias
@@ -64,29 +64,18 @@ else % Implementacion del profesor Valenzuela
             minCorridas = size(r.intentos, 1);
         end
     end
-    
-    corridas = 1;
-    
+    figure
+    plot(graf(1).f)
     curva.prom = [];
     curva.desv = [];
     for i= 1:minCorridas
         prom = 0;
         desv = 0;
         for j= 1:totalCorridas
-            prom = prom + graf(j).f(i);
+            prom = graf(j).f(i)
         end
-        prom = prom / totalCorridas;
-        
-        for j= 1:totalCorridas
-            desv = desv + (prom - graf(j).f(i)) ^ 2;
-        end
-        desv = sqrt(desv / (totalCorridas - 1)) ;
-        curva.prom = [curva.prom; prom];
-        curva.desv = [curva.desv; desv];
+        curva.prom = [curva.prom; mean(graf.f(i))];
+        curva.desv = [curva.desv; std(graf.f(i))];
     end 
-    
-    figure
-    PLOT = [curva.prom'; (curva.prom + curva.desv)'; (curva.prom - curva.desv)']';
-    plot(PLOT, 'b');
 end
 

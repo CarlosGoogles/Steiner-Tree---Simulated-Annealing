@@ -71,9 +71,15 @@ elseif isequal(varargin{1},'a')
    end
 
 elseif isequal(varargin{1},'g')
+    clf;
+    
    G = varargin{2};
    % cuadros(xC,yC,xticks,yticks)
    hold on
+   
+    [costo, conectividad] = costoSteiner(G);
+    title(sprintf('costoTotal=%f conectividad=%f',costo,conectividad))
+   
    plot(P(:,1),P(:,2),'.b',P(ind,1),P(ind,2),'or')
    for i=1:length(G)
       a = A(G(i),:);
@@ -85,7 +91,7 @@ elseif isequal(varargin{1},'g')
       text(P(ind(i),1)+dt,P(ind(i),2)+dt,sprintf('%d',ind(i)))
    end
    hold off
-
+    pause(0.01)
 end
 
 
