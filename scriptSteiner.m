@@ -28,10 +28,10 @@ costoSteiner(A, P, ind);
 
 clf;
 
-params.cadIntAcep = 20;
-params.cadInt = 200;
+params.cadIntAcep = 100;
+params.cadInt = 1000;
 params.maxCad = 10;
-params.frecImp = 5000;
+params.frecImp = 50;
 params.x0 = G;
 params.FcnObj = @funcionEvaluadora; % Ver en simulatedAnnealing.m
 params.FcnVec = @generaVecino1;     % Ver en simulatedAnnealing.m
@@ -42,7 +42,7 @@ params.beta = 1.3;
 params.minRazAcep = 0.95;
 params.min = 1;
 params.maxSize = size(T, 1);
-
+params.curvaDeMejora = 1;
 
 totalCorridas = 10;
 propio = 0;

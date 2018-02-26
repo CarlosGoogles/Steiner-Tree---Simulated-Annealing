@@ -40,7 +40,7 @@ function r = recocido(p,varargin)
 %*****************************************************************
 
 global mejor params res intentos c MIN maxEdgeSize minNeededEdges ... 
-        mejorRespuestaCosto curvaDeMejora;
+        mejorRespuestaCosto imprimeGrafico;
     mejorRespuestaCosto = 10000000;
     maxEdgeSize = p.maxSize;
     minNeededEdges = 1000000;
@@ -66,7 +66,7 @@ end
   
 params = p;
 intentos = 1;
-curvaDeMejora = params.curvaDeMejora;
+imprimeGrafico = params.curvaDeMejora
 
 % Inicializar u con el punto x0, e inicializar mejor
 u.x = params.x0;
@@ -103,7 +103,7 @@ function u = EvaluaPunto(u)
 %*******************************************
 % Evalua un punto u y guarda su evaluacion *
 %*******************************************
-global mejor params res intentos c MIN curvaDeMejora
+global mejor params res intentos c MIN
 u.f = params.FcnObj(u.x);
 intentos = intentos + 1;
 if MIN
@@ -125,9 +125,8 @@ if mod(intentos,params.frecImp)==0
    res.intentos = [res.intentos; intentos]; 
    res.c = [res.c; c];
    
-   if curvaDeMejora == 0
-        params.Imp('g', mejor.x);
-   end
+   if imprimeGrafico == 1
+    params.Imp('g', mejor.x);
 end
 
 function b = AceptaIntento(u, v)
