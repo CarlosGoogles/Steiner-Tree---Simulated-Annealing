@@ -1,4 +1,5 @@
-
+%% Funcion de vencidad
+% Da preferencia a estados mas cercanos a la respuesta mas correcta
 function [Gv] = generaVecino1(Gu)
     global maxEdgeSize minNeededEdges;
     
@@ -15,7 +16,7 @@ function [Gv] = generaVecino1(Gu)
         if sizeG < minNeededEdges - 1
             % Agrega edge
             Gu = [Gu datasample(notInGu, 1)];
-        elseif rand < ((minNeededEdges - 1) / sizeG) .^ 1.3
+        elseif rand < ((minNeededEdges - 1) / sizeG) .^ 4.0
             % Agrega edge
             Gu = [Gu datasample(notInGu, 1)];
         else
@@ -26,7 +27,7 @@ function [Gv] = generaVecino1(Gu)
         if sizeG > minNeededEdges - 1
             % Quitar edge
             Gu = datasample(Gu, sizeG-1, 'Replace', false);
-        elseif rand < ((minNeededEdges - 1) / sizeG) .^ 1.5
+        elseif rand < ((minNeededEdges - 1) / sizeG) .^ 4.0
             % Quita edge
             Gu = datasample(Gu, sizeG-1, 'Replace', false);
         else
